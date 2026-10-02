@@ -1,0 +1,35 @@
+name: Test METI Access
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test METI pages
+        run: |
+          echo "=== METI press ==="
+          curl -L \
+            -A "Mozilla/5.0" \
+            -o /dev/null \
+            -s \
+            -w "HTTP %{http_code}\n" \
+            https://www.meti.go.jp/press/archive_202610.html
+
+          echo "=== METI public offer ==="
+          curl -L \
+            -A "Mozilla/5.0" \
+            -o /dev/null \
+            -s \
+            -w "HTTP %{http_code}\n" \
+            https://www.meti.go.jp/information/publicoffer/kobo.html
+
+          echo "=== METI selection ==="
+          curl -L \
+            -A "Mozilla/5.0" \
+            -o /dev/null \
+            -s \
+            -w "HTTP %{http_code}\n" \
+            https://www.meti.go.jp/information/publicoffer/saitaku.html
